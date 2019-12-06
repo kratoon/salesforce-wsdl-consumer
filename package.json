@@ -20,6 +20,7 @@
   "license": "apache-2.0",
   "files": [
     "src/",
+    "dist/",
     "!lib/**/__tests__/"
   ],
   "dependencies": {

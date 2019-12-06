@@ -13,8 +13,8 @@
     "salesforce",
     "force.com",
     "metadata",
-    "typescript",
-    "ts"
+    "ts",
+    "types"
   ],
   "author": "Ondřej Kratochvíl <ondrakratochvil96@gmail.com>",
   "license": "apache-2.0",
@@ -35,7 +35,7 @@
     "tslint-microsoft-contrib": "^5.2.1",
     "typescript": "^3.7.2"
   },
-  "prepublish": "tsc",
+  "prepublish": "npm run build",
   "bugs": {
     "url": "https://github.com/kratoon3/salesforce-wsdl-consumer/issues"
   },

@@ -1,7 +1,7 @@
 {
   "name": "salesforce-wsdl-consumer",
   "version": "0.0.8",
-  "description": "Generate TypeScript types from Force.com Metadata WSDL.",
+  "description": "Simple Force.com Metadata WSDL parser and types generator.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

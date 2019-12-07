@@ -14,8 +14,10 @@
     "salesforce",
     "force.com",
     "metadata",
+    "wsdl",
     "ts",
-    "types"
+    "types",
+    "salesforcedx"
   ],
   "author": "Ondřej Kratochvíl <ondrakratochvil96@gmail.com>",
   "license": "apache-2.0",

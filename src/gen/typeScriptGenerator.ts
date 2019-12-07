@@ -84,7 +84,8 @@ function buildType(type: SimpleType): string {
 function buildScript(parsedMetadataWSDL: ParsedMetadataWSDL): string {
     const tslintDisabled: string = "/* tslint:disable */\n\n";
     const notice: string = `/* This file was created via "salesforce-wsdl-consumer" on ${new Date()}.
-Do not make any changes here as it can be anytime regenerated. */
+Do not make any changes here as it can be anytime regenerated. 
+Issues: https://github.com/kratoon3/salesforce-wsdl-consumer/issues */
 
 `;
     const typeScriptTypes: string[] = parsedMetadataWSDL.simpleTypes.map(buildType);

@@ -4,3 +4,7 @@ export const latestMetadataVersion: MetadataVersion = "47";
 
 export * from "./wsdl/wsdl-parser";
 export * from "./gen/typeScriptGenerator";
+export {
+    readMetadataWSDLByVersion,
+    readMetadataWSDLFromPath
+} from "./resources";

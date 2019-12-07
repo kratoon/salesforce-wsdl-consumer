@@ -14,9 +14,9 @@ in another project.
 
 If you need already generated types
 or read/write metadata files,
-you can use this
-[project](https://github.com/kratoon3/salesforce-metadata)
-published to npm instead.
+you can use the
+[salesforce-metadata](https://github.com/kratoon3/salesforce-metadata)
+project published to npm instead.
 
 ## Generator Example
 ```typescript

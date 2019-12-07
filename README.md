@@ -18,7 +18,7 @@ you can use the
 [salesforce-metadata](https://github.com/kratoon3/salesforce-metadata)
 project published to npm instead.
 
-## Generator Example
+## Usage
 ```typescript
 generateTypesFromMetadataWSDL({
     outputFile: "types.ts",
@@ -27,7 +27,6 @@ generateTypesFromMetadataWSDL({
 ```
 You can also import the LATEST_METADATA_VERSION constant.
 
-## Parser Example
 To read MetadataWSDL, you have two options,
 `readMetadataWSDLByVersion` and `readMetadataWSDLFromPath`.
 Then parse types using `parseTypes` function.

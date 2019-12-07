@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import {ComplexType, Element, ParsedMetadataWSDL, parseTypes, SimpleType} from "..";
-import {latestMetadataVersion, MetadataVersion} from "../index";
+import {LATEST_METADATA_VERSION, MetadataVersion} from "../index";
 import {readMetadataWSDLByVersion, readMetadataWSDLFromPath} from "../resources";
 import {MetadataWSDL} from "../wsdl/wsdl-types";
 
@@ -100,13 +100,13 @@ export function generateTypesFromMetadataWSDL(
 ): Promise<void> {
     function getMetadataWSDL(): Promise<MetadataWSDL> {
         if (options.latest) {
-            return readMetadataWSDLByVersion(latestMetadataVersion);
+            return readMetadataWSDLByVersion(LATEST_METADATA_VERSION);
         } else if (options.metadataVersion) {
             return readMetadataWSDLByVersion(options.metadataVersion);
         } else if (options.metadataWsdlPath) {
             return readMetadataWSDLFromPath(options.metadataWsdlPath);
         }
-        return readMetadataWSDLByVersion(latestMetadataVersion);
+        return readMetadataWSDLByVersion(LATEST_METADATA_VERSION);
     }
     const outputFile: string = options.outputFile || "types.ts";
     fs.ensureFileSync(outputFile);

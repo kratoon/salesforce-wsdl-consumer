@@ -29,7 +29,7 @@ You can also import the LATEST_METADATA_VERSION constant.
 
 To read MetadataWSDL, you have two options,
 `readMetadataWSDLByVersion` and `readMetadataWSDLFromPath`.
-Then parse types using `parseTypes` function.
+Then parse types using `parseMetadataWSDL` function.
 ```typescript
 readMetadataWSDLByVersion("47")
     .then(parseMetadataWSDL)

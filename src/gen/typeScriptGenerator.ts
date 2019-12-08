@@ -55,10 +55,6 @@ function firstLetterToUpperCase(str: string): string {
     return str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
 }
 
-function toLegalPropertyName(str: string): string {
-    return str.replace(/[\W_]+/g, "_");
-}
-
 function getType(element: Element): string | null {
     const mapping: { [xsdType: string]: string } = {
         int: "number",

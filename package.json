@@ -1,11 +1,12 @@
 {
   "name": "salesforce-wsdl-consumer",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "description": "Simple Force.com Metadata WSDL parser and types generator.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "postbuild": "cp -r resources dist/",
     "watch": "tsc --watch",
     "prepublish": "npm run build && npm t",
     "test": "jest",
@@ -25,6 +26,7 @@
   "files": [
     "dist/",
     "resources/",
+    "resources/",
     "src/"
   ],
   "dependencies": {
@@ -41,6 +43,7 @@
     "tslint-microsoft-contrib": "^5.2.1",
     "typescript": "^3.7.3"
   },
+  "homepage": "https://github.com/kratoon3/salesforce-wsdl-consumer",
   "bugs": {
     "url": "https://github.com/kratoon3/salesforce-wsdl-consumer/issues"
   },

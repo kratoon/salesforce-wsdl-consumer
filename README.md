@@ -32,6 +32,6 @@ To read MetadataWSDL, you have two options,
 Then parse types using `parseTypes` function.
 ```typescript
 readMetadataWSDLByVersion("47")
-    .then(parseTypes)
+    .then(parseMetadataWSDL)
     .then(({complexTypes, simpleTypes}: ParsedMetadataWSDL) => {});
 ```

@@ -62,7 +62,7 @@ export interface Element {
  *
  * @author Ondřej Kratochvíl
  */
-export function parseTypes(metadataWSDL: MetadataWSDL): ParsedMetadataWSDL {
+export function parseMetadataWSDL(metadataWSDL: MetadataWSDL): ParsedMetadataWSDL {
     const complexTypes: XsdComplexType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:complexType"];
     const simpleTypes: XsdSimpleType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:simpleType"];
     const elements: XsdElement[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:element"];

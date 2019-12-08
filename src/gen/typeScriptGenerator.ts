@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import {ComplexType, Element, MetadataWSDL, ParsedMetadataWSDL, parseTypes, SimpleType} from "..";
+import {ComplexType, Element, MetadataWSDL, ParsedMetadataWSDL, parseMetadataWSDL, SimpleType} from "..";
 import {LATEST_METADATA_VERSION, MetadataVersion} from "../index";
 import {readMetadataWSDLByVersion, readMetadataWSDLFromPath} from "../resources";
 
@@ -48,7 +48,7 @@ export function generateTypesFromMetadataWSDL(
     const outputFile: string = options.outputFile || "metadata-types.ts";
     fs.ensureFileSync(outputFile);
     return getMetadataWSDL()
-        .then((wsdl: MetadataWSDL) => fs.writeFile(outputFile, buildScript(parseTypes(wsdl))));
+        .then((wsdl: MetadataWSDL) => fs.writeFile(outputFile, buildScript(parseMetadataWSDL(wsdl))));
 }
 
 function isReservedWord(word: string): boolean {

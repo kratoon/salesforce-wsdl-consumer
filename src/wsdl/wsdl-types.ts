@@ -1,4 +1,8 @@
-
+/**
+ * Type for parsed Metadata WSDL XML.
+ *
+ * @author Ondřej Kratochvíl
+ */
 export interface MetadataWSDL {
     definitions: {
         $: {

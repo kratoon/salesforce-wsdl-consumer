@@ -1,14 +1,15 @@
 {
   "name": "salesforce-wsdl-consumer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Simple Force.com Metadata WSDL parser and types generator.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "npm run build && npm t",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "keywords": [
     "salesforce",
@@ -24,8 +25,7 @@
   "files": [
     "dist/",
     "resources/",
-    "src/",
-    "!lib/**/__tests__/"
+    "src/"
   ],
   "dependencies": {
     "fs-extra": "^8.1.0",
@@ -33,16 +33,19 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.23",
     "@types/xml2js": "^0.4.5",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
     "tslint-microsoft-contrib": "^5.2.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.3"
   },
   "bugs": {
     "url": "https://github.com/kratoon3/salesforce-wsdl-consumer/issues"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/kratoon3/salesforce-wsdl-consumer.git"
+    "type": "git",
+    "url": "https://github.com/kratoon3/salesforce-wsdl-consumer.git"
   }
 }

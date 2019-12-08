@@ -44,6 +44,16 @@ describe("wsdl-parser", () => {
                 expect(allOrNoneHeader.elements[0].type).toBe("boolean");
                 expect(allOrNoneHeader.elements[0].isArray).toBe(false);
 
+                const accountRelationshipShareRule: ComplexType = getComplexTypeByName(parsed, "AccountRelationshipShareRule")!;
+                expect(accountRelationshipShareRule.base).toBe("Metadata");
+                expect(accountRelationshipShareRule.elements.length).toBe(7);
+                expect(accountRelationshipShareRule.elements[0].name).toBe("accessLevel");
+                expect(accountRelationshipShareRule.elements[0].isArray).toBe(false);
+                expect(accountRelationshipShareRule.elements[0].isOptional).toBe(false);
+                expect(accountRelationshipShareRule.elements[2].name).toBe("description");
+                expect(accountRelationshipShareRule.elements[2].isArray).toBe(false);
+                expect(accountRelationshipShareRule.elements[2].isOptional).toBe(true);
+
                 const extendedErrorCode: SimpleType = getSimpleTypeByName(parsed, "ExtendedErrorCode")!;
                 expect(extendedErrorCode.enumerations!.length).toBe(340);
                 expect(extendedErrorCode.enumerations!.includes("ACTIONCALL_DUPLICATE_INPUT_PARAM")).toBe(true);

@@ -53,6 +53,7 @@ export interface Element {
     name: string;
     type: string;
     isArray: boolean;
+    isOptional: boolean;
 }
 
 /**
@@ -157,7 +158,8 @@ function createPropertiesFromSequenceElements(sequenceElements: XsdElement[]): E
     return sequenceElements.reduce((result: Element[], el: XsdElement): Element[] => {
         if (el.$.type) {
             const isArray: boolean = Boolean(el.$.maxOccurs && el.$.maxOccurs === "unbounded");
-            result.push({name: el.$.name, type: parseStringType(el.$.type), isArray});
+            const isOptional: boolean = Boolean(el.$.minOccurs && el.$.minOccurs === "0");
+            result.push({name: el.$.name, type: parseStringType(el.$.type), isArray, isOptional});
         } else {
             console.warn(`Sequence element without type: ${JSON.stringify(el, null, 2)}`);
         }

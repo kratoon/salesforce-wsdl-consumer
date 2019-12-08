@@ -12,30 +12,71 @@ import {
     XsdSimpleType
 } from "./wsdl-types";
 
+/**
+ * Result of Metadata WSDL parser.
+ *
+ * @author Ondřej Kratochvíl
+ */
 export interface ParsedMetadataWSDL {
     complexTypes: ComplexType[];
     simpleTypes: SimpleType[];
 }
 
+/**
+ * Parsed xsd complex type.
+ *
+ * @author Ondřej Kratochvíl
+ */
 export interface ComplexType {
     name: string;
     base?: string;
     elements: Element[];
 }
 
+/**
+ * Parsed xsd simple type.
+ *
+ * @author Ondřej Kratochvíl
+ */
 export interface SimpleType {
     name: string;
     base?: string;
     enumerations?: string[];
 }
 
+/**
+ * Parsed xsd element.
+ *
+ * @author Ondřej Kratochvíl
+ */
 export interface Element {
     name: string;
     type: string;
     isArray: boolean;
 }
 
-function parseType(type: string): string {
+/**
+ * Parse Metadata WSDL.
+ *
+ * @param metadataWSDL - already parsed XML Metadata WSDL.
+ *
+ * @author Ondřej Kratochvíl
+ */
+export function parseTypes(metadataWSDL: MetadataWSDL): ParsedMetadataWSDL {
+    const complexTypes: XsdComplexType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:complexType"];
+    const simpleTypes: XsdSimpleType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:simpleType"];
+    const elements: XsdElement[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:element"];
+    return [
+        parseTypesFromElements(elements),
+        parseTypesFromSimpleTypes(simpleTypes),
+        parseTypesFromComplexTypes(complexTypes)
+    ].reduce((result: ParsedMetadataWSDL, it: ParsedMetadataWSDL) => ({
+        complexTypes: result.complexTypes.concat(it.complexTypes),
+        simpleTypes: result.simpleTypes.concat(it.simpleTypes)
+    }), {complexTypes: [], simpleTypes: []});
+}
+
+function parseStringType(type: string): string {
     if (type.startsWith("xsd:")) {
         return type.substring(4);
     } else if (type.startsWith("tns:")) {
@@ -50,7 +91,7 @@ function parseTypesFromSimpleTypes(simpleTypes: XsdSimpleType[]): ParsedMetadata
         .reduce((result: ParsedMetadataWSDL, it: XsdSimpleType) => {
             const name: string = it.$.name;
             const restriction: XsdRestriction = it["xsd:restriction"][0];
-            const base: string = parseType(restriction.$.base);
+            const base: string = parseStringType(restriction.$.base);
             const enumerations: XsdEnumeration[] | undefined = restriction["xsd:enumeration"];
             const length: XsdLength[] | undefined = restriction["xsd:length"];
             const pattern: XsdPattern[] | undefined = restriction["xsd:pattern"];
@@ -86,7 +127,7 @@ function parseTypesFromComplexTypes(complexTypes: XsdComplexType[]): ParsedMetad
                 }
             } else if (complexContents) {
                 const extension: XsdExtension = complexContents[0]["xsd:extension"][0];
-                const base: string = parseType(extension.$.base);
+                const base: string = parseStringType(extension.$.base);
                 const extensionSequence: XsdSequence = extension["xsd:sequence"][0];
                 const sequenceElements: XsdElement[] = extensionSequence["xsd:element"];
                 const elements: Element[] = sequenceElements
@@ -116,24 +157,10 @@ function createPropertiesFromSequenceElements(sequenceElements: XsdElement[]): E
     return sequenceElements.reduce((result: Element[], el: XsdElement): Element[] => {
         if (el.$.type) {
             const isArray: boolean = Boolean(el.$.maxOccurs && el.$.maxOccurs === "unbounded");
-            result.push({name: el.$.name, type: parseType(el.$.type), isArray});
+            result.push({name: el.$.name, type: parseStringType(el.$.type), isArray});
         } else {
             console.warn(`Sequence element without type: ${JSON.stringify(el, null, 2)}`);
         }
         return result;
     }, []);
-}
-
-export function parseTypes(metadataWSDL: MetadataWSDL): ParsedMetadataWSDL {
-    const complexTypes: XsdComplexType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:complexType"];
-    const simpleTypes: XsdSimpleType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:simpleType"];
-    const elements: XsdElement[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:element"];
-    return [
-        parseTypesFromElements(elements),
-        parseTypesFromSimpleTypes(simpleTypes),
-        parseTypesFromComplexTypes(complexTypes)
-    ].reduce((result: ParsedMetadataWSDL, it: ParsedMetadataWSDL) => ({
-            complexTypes: result.complexTypes.concat(it.complexTypes),
-            simpleTypes: result.simpleTypes.concat(it.simpleTypes)
-    }), {complexTypes: [], simpleTypes: []});
 }

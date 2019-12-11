@@ -1,12 +1,11 @@
 {
   "name": "salesforce-wsdl-consumer",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Simple Force.com Metadata WSDL parser and types generator.",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "postbuild": "cp -r resources dist/",
     "watch": "tsc --watch",
     "prepublish": "npm run build && npm t",
     "test": "jest",
@@ -24,7 +23,6 @@
   "author": "Ondřej Kratochvíl <ondrakratochvil96@gmail.com>",
   "license": "apache-2.0",
   "files": [
-    "dist/",
     "resources/",
     "src/"
   ],

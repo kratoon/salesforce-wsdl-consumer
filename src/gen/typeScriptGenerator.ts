@@ -51,27 +51,8 @@ export function generateTypesFromMetadataWSDL(
         .then((wsdl: MetadataWSDL) => fs.writeFile(outputFile, buildScript(parseMetadataWSDL(wsdl))));
 }
 
-function isReservedWord(word: string): boolean {
-    return RESERVED_WORDS.includes(word);
-}
-
-const RESERVED_WORDS: string[] = [
-    "break", "case", "catch", "class", "const", "continue", "debugger",
-    "default", "delete", "do", "else", "enum", "export", "extends",
-    "false", "finally", "for", "function", "if", "import", "in", "instanceof",
-    "new", "null", "return", "super", "switch", "this", "throw", "true", "try",
-    "typeof", "var", "void", "while", "with", "as", "implements", "interface", "let",
-    "package", "private", "protected", "public", "static", "yield", "any",
-    "boolean", "constructor", "declare", "get", "module", "require", "number",
-    "set", "string", "symbol", "type", "from", "of"
-];
-
 function firstLetterToUpperCase(str: string): string {
     return str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
-}
-
-function toLegalPropertyName(str: string): string {
-    return str.replace(/[\W_]+/g, "_");
 }
 
 function getType(element: Element): string | null {

@@ -67,7 +67,10 @@ export function parseMetadataWSDL(metadataWSDL: MetadataWSDL): ParsedMetadataWSD
     const complexTypes: XsdComplexType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:complexType"];
     const simpleTypes: XsdSimpleType[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:simpleType"];
     const elements: XsdElement[] = metadataWSDL.definitions.types[0]["xsd:schema"][0]["xsd:element"];
-    return [
+    console.log(`XSD complex types: ${complexTypes.length}`);
+    console.log(`XSD simple types: ${simpleTypes.length}`);
+    console.log(`XSD elements: ${elements.length}`);
+    const parsed: ParsedMetadataWSDL = [
         parseTypesFromElements(elements),
         parseTypesFromSimpleTypes(simpleTypes),
         parseTypesFromComplexTypes(complexTypes)
@@ -75,6 +78,9 @@ export function parseMetadataWSDL(metadataWSDL: MetadataWSDL): ParsedMetadataWSD
         complexTypes: result.complexTypes.concat(it.complexTypes),
         simpleTypes: result.simpleTypes.concat(it.simpleTypes)
     }), {complexTypes: [], simpleTypes: []});
+    console.log(`Complex types: ${parsed.complexTypes.length}`);
+    console.log(`Simple types: ${parsed.simpleTypes.length}`);
+    return parsed;
 }
 
 function parseStringType(type: string): string {

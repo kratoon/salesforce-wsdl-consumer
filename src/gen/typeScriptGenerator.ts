@@ -45,7 +45,6 @@ export function generateTypesFromMetadataWSDL(
         }
         return readMetadataWSDLByVersion(LATEST_METADATA_VERSION);
     }
-
     const outputFile: string = options.outputFile || "metadata-types.ts";
     fs.ensureFileSync(outputFile);
     return getMetadataWSDL()

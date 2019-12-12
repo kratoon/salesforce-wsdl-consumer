@@ -6,6 +6,7 @@
   "types": "src/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "postbuild": "cp -r resources dist/",
     "watch": "tsc --watch",
     "prepublish": "npm run build && npm t",
     "test": "jest",
@@ -23,6 +24,7 @@
   "author": "Ondřej Kratochvíl <ondrakratochvil96@gmail.com>",
   "license": "apache-2.0",
   "files": [
+    "dist/",
     "resources/",
     "src/"
   ],

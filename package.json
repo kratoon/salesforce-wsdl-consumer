@@ -6,7 +6,6 @@
   "types": "src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "postbuild": "cp -r resources dist/",
     "watch": "tsc --watch",
     "prepublish": "npm run build && npm t",
     "test": "jest",

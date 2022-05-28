@@ -28,7 +28,7 @@
     "src/"
   ],
   "dependencies": {
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "xml2js": "^0.4.22"
   },
   "devDependencies": {
